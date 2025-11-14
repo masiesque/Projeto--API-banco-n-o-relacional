@@ -6,9 +6,13 @@ const RouteUsers = require('./routers/user');
 //COM DOTENV
 require('dotenv').config({ path: require('path').join(__dirname, '../.env') });
 const express = require('express')
+const cors = require('cors')
+
 const app = express();
 app.use(express.json());
+app.use(cors());//cor precisa vir antes das rotas, para nao dar problema de cors
 app.use(RouteUsers);
+
 const mongoose = require('mongoose');
 
 mongoose.connect(process.env.MONGO_URL_CONECTION).then(()=>{
